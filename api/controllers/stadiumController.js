@@ -48,3 +48,16 @@ export const getStadiums = async (req, res, next) => {
         next(error)
     }
 }
+
+export const countByCity = async (req, res, next) => {
+    const cities = req.query.cities.split(",");
+   
+    try{
+        const citiesList = await Promise.all(cities.map((city) => {
+            return Stadium.countDocuments({ city:city })
+        }))
+        res.status(200).json(citiesList)
+    } catch (error) {
+        next(error)
+    }
+};
