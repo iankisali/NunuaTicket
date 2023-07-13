@@ -1,5 +1,5 @@
 import express, { json } from 'express'
-import { createStadium, updateStadium, deleteStadium, getStadium, getStadiums } from '../controllers/stadiumController.js'
+import { createStadium, updateStadium, deleteStadium, getStadium, getStadiums, countByCity } from '../controllers/stadiumController.js'
 import { verifyAdmin } from '../utils/verifyToken.js';
 
 const router = express.Router();
@@ -14,9 +14,12 @@ router.put('/:id',verifyAdmin, updateStadium);
 router.delete('/:id',verifyAdmin, deleteStadium);
 
 //GET
-router.get('/:id', getStadium);
+router.get('/find/:id', getStadium);
 
 //GET ALL
 router.get('/', getStadiums);
+
+router.get('/countByCity', countByCity);
+router.get('/countByType', getStadiums);
 
 export default router;
